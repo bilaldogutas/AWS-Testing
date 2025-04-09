@@ -20,12 +20,12 @@ public class SearchFunctionTests {
 
     @Test(priority = 1)
     void testSearchWithValidKeyword() throws InterruptedException {
-        // Click the search icon
+        // click search icon
         WebElement searchIcon = driver.findElement(By.xpath("//*[@id='m-nav']/div[1]/div[2]/nav/div/button"));
         searchIcon.click();
         Thread.sleep(2000);
 
-        // Type into the search fieldd
+        // type into the search field
         WebElement searchBox = driver.findElement(By.xpath("//*[@id=\"m-nav-desktop-search\"]/form/div/span/input[2]"));
         searchBox.sendKeys("Amazon EC2 Auto Scaling");
         Thread.sleep(2000);
@@ -35,7 +35,7 @@ public class SearchFunctionTests {
         popup.click();
         Thread.sleep(3000);
 
-        // Check for the expected keywords
+        // check for expected keywords
         String pageSource = driver.getPageSource().toLowerCase();
         assert pageSource.contains("auto scaling") || pageSource.contains("ec2") : "Expected result content not found.";
 
@@ -44,18 +44,18 @@ public class SearchFunctionTests {
 
     @Test(priority = 2)
     void testEmptySearchReturnsNothing() throws InterruptedException {
-        // Click the search icon
+        // click the search icon
         WebElement searchIcon = driver.findElement(By.xpath("//*[@id='m-nav']/div[1]/div[2]/nav/div/button"));
         searchIcon.click();
         Thread.sleep(2000);
 
-        // Type nothing and hit Enter
+        // type nothing and hit Enter
         WebElement searchBox = driver.findElement(By.xpath("//*[@id=\"m-nav-desktop-search\"]/form/div/span/input[2]"));
         searchBox.clear();
         searchBox.sendKeys(Keys.ENTER);
         Thread.sleep(2000);
 
-        // Verify that page does not crash
+        // verify that page does not crash
         String pageSource = driver.getPageSource().toLowerCase();
         assert pageSource.contains("search") || pageSource.contains("no results") : "Site should handle empty search without crashing.";
 
@@ -65,12 +65,12 @@ public class SearchFunctionTests {
     @Test(priority = 3)
     void testSearchWithSpecialCharacters() throws InterruptedException {
         driver.get("https://aws.amazon.com/free/");
-        // Click the search icon
+        // click the search icon
         WebElement searchIcon = driver.findElement(By.xpath("//*[@id='m-nav']/div[1]/div[2]/nav/div/button"));
         searchIcon.click();
         Thread.sleep(2000);
 
-        // Enter special characters into the search field and press Enter
+        // enter special characters into the search field
         WebElement searchBox = driver.findElement(By.xpath("//*[@id=\"m-nav-desktop-search\"]/form/div/span/input[2]"));
         searchBox.clear();
         searchBox.sendKeys("!@#$%^&*");
@@ -78,7 +78,7 @@ public class SearchFunctionTests {
         searchBox.sendKeys(Keys.ENTER);
         Thread.sleep(3000);
 
-        // Check that the site handled the input without crashing
+        // check that the site handled the input
         String pageSource = driver.getPageSource().toLowerCase();
         assert pageSource.contains("no results") || pageSource.contains("search") : "Special character search should not crash.";
 
@@ -88,12 +88,12 @@ public class SearchFunctionTests {
     @Test(priority = 4)
     void testCaseInsensitiveSearch() throws InterruptedException {
         driver.get("https://aws.amazon.com/free/");
-        // Click the search icon
+        // click the search icon
         WebElement searchIcon = driver.findElement(By.xpath("//*[@id='m-nav']/div[1]/div[2]/nav/div/button"));
         searchIcon.click();
         Thread.sleep(2000);
 
-        // Enter lowercase "dynamodb" into the search box
+        // enter lowercase "dynamodb" into the search box
         WebElement searchBox = driver.findElement(By.xpath("//*[@id=\"m-nav-desktop-search\"]/form/div/span/input[2]"));
         searchBox.clear();
         searchBox.sendKeys("dyanmodb");
@@ -101,7 +101,7 @@ public class SearchFunctionTests {
         searchBox.sendKeys(Keys.ENTER);
         Thread.sleep(4000);
 
-        // Validate that results include "dynamodb"
+        // verify that results include "dynamodb"
         String pageSource = driver.getPageSource().toLowerCase();
         assert pageSource.contains("dynamodb") : "Case-insensitive search failed to return results.";
 
@@ -111,12 +111,12 @@ public class SearchFunctionTests {
     @Test(priority = 5)
     void testScreenshotOfSearchResults() throws IOException, InterruptedException {
         driver.get("https://aws.amazon.com/free/");
-        // Click the search icon
+        // click the search icon
         WebElement searchIcon = driver.findElement(By.xpath("//*[@id='m-nav']/div[1]/div[2]/nav/div/button"));
         searchIcon.click();
         Thread.sleep(2000);
 
-        // Enter "SageMaker" into the search box
+        // enter "SageMaker" into the search box
         WebElement searchBox = driver.findElement(By.xpath("//*[@id=\"m-nav-desktop-search\"]/form/div/span/input[2]"));
         searchBox.clear();
         searchBox.sendKeys("SageMaker");
@@ -124,14 +124,9 @@ public class SearchFunctionTests {
         searchBox.sendKeys(Keys.ENTER);
         Thread.sleep(3000);
 
-        // Capture screenshot
+        // screenshot
         File source = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         File destinationFolder = new File("C:\\Users\\pagan\\Desktop\\School\\Software Testing\\Project Screenshots");
-
-        // Create the folder if it doesn’t exist
-        if (!destinationFolder.exists()) {
-            destinationFolder.mkdirs();
-        }
         File destinationFile = new File(destinationFolder, "sagemaker.png");
         FileHandler.copy(source, destinationFile);
 
