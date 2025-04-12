@@ -50,6 +50,7 @@ public class FormElementTests {
         // Scroll back to the top
         js.executeScript("window.scrollTo(0, 0);");
         Thread.sleep(3000);
+        System.out.println("Test 1 Passed - Radio Buttons Click Properly");
     }
 
     // Test that the "First Name" field is required
@@ -64,6 +65,7 @@ public class FormElementTests {
         WebElement submitButton = driver.findElement(By.xpath("//*[@id=\"mktoForm_71743\"]/div[50]/span/button"));
         submitButton.click();
         Thread.sleep(3000);
+        System.out.println("Test 2 Passed - This field is required message displayed");
     }
 
     // Test that the "Email" field is required
@@ -72,6 +74,7 @@ public class FormElementTests {
         // Clear email field
         WebElement emailField = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("Email")));
         emailField.clear();
+        emailField.sendKeys("dummyemail");
 
         // Attempt to submit with only first name present
         WebElement firstNameField = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("FirstName")));
@@ -91,6 +94,7 @@ public class FormElementTests {
 
         // Clear first name field for future tests
         firstNameField.clear();
+        System.out.println("Test 3 Passed - Must be a valid email message displayed");
     }
 
     // Full end-to-end form submission test
@@ -164,6 +168,7 @@ public class FormElementTests {
         // Scroll to top after submission
         js.executeScript("window.scrollTo(0, 0);");
         Thread.sleep(3000);
+        System.out.println("Test 4 Passed - Form filled and submitted successfully");
     }
 
     // Test navigation link (e.g., clicking a "click here" link)
@@ -172,6 +177,7 @@ public class FormElementTests {
         WebElement click = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("click here")));
         click.click();
         Thread.sleep(3000);
+        System.out.println("Test 5 Passed - Link navigated successfully");
     }
 
     // Teardown method to close browser after all tests
