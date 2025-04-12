@@ -102,6 +102,7 @@ testNavigateAfterSubmission -
 
 8. WindowAndAlertTests
 
+test page: https://aws.amazon.com/partners/capgemini/
 
 testExternalLinkOpensNewTab – Click a link that opens in a new tab and validate tab switch. +
 
