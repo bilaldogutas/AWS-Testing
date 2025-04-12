@@ -173,7 +173,7 @@ public class FormElementTests {
 
     // Test navigation link (e.g., clicking a "click here" link)
     @Test(priority = 5)
-    public void testNavigate() throws InterruptedException {
+    public void testNavigateAfterSubmission() throws InterruptedException {
         WebElement click = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("click here")));
         click.click();
         Thread.sleep(3000);
