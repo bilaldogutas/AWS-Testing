@@ -36,6 +36,8 @@ public class FooterTests {
         String currentURL = driver.getCurrentUrl();
         assert currentURL.toLowerCase().contains("privacy") : "Privacy Policy page did not open.";
         System.out.println("Privacy Policy link works.");
+        Thread.sleep(2000);
+        System.out.println("Test 1 Passed (footer)");
     }
 
     @Test(priority = 2)
@@ -54,6 +56,8 @@ public class FooterTests {
         String currentURL = driver.getCurrentUrl();
         assert currentURL.toLowerCase().contains("terms") : "Terms of Service page did not open.";
         System.out.println("Terms of Service link works.");
+        Thread.sleep(2000);
+        System.out.println("Test 2 Passed (footer)");
     }
 
     @Test(priority = 3)
@@ -72,6 +76,8 @@ public class FooterTests {
         String currentURL = driver.getCurrentUrl();
         assert currentURL.toLowerCase().contains("contact") : "Contact Us page did not load.";
         System.out.println("Contact Us link works.");
+        Thread.sleep(2000);
+        System.out.println("Test 3 Passed (footer)");
     }
 
     @Test(priority = 4)
@@ -89,6 +95,8 @@ public class FooterTests {
         for (WebElement link : socialLinks) {
             System.out.println("Found social link: " + link.getAttribute("href"));
         }
+        Thread.sleep(2000);
+        System.out.println("Test 4 Passed (footer)");
     }
 
     @Test(priority = 5)
@@ -105,6 +113,8 @@ public class FooterTests {
 
         assert footerText.contains("©") || footerText.contains("amazon web services") : "Footer text content missing expected info.";
         System.out.println("Footer contains expected copyright.");
+        Thread.sleep(2000);
+        System.out.println("Test 5 Passed (footer)\n");
     }
 
     @AfterClass

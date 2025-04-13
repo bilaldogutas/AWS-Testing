@@ -1,34 +1,40 @@
-// Import necessary Selenium and TestNG packages
+package TestCases;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.*;
-
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import java.io.File;
+import org.openqa.selenium.io.FileHandler;
+import java.io.IOException;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import org.testng.annotations.Test;
 
 public class NavigationMenuTests {
-
-    WebDriver driver;
+    static WebDriver driver;
     static Actions actions;
 
-    // Runs once before all tests – sets up the ChromeDriver and opens the AWS homepage
     @BeforeClass
     public void setup() throws InterruptedException {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\18566\\OneDrive - Florida Gulf Coast University\\Desktop\\chromedriver.exe");
-        driver = new ChromeDriver(); // Launch Chrome
-        driver.manage().window().maximize(); // Maximize browser window
-        driver.get("https://aws.amazon.com/"); // Navigate to AWS homepage
-        actions = new Actions(driver); // Initialize Actions object for mouse interactions
-        Thread.sleep(2000); // Wait for page to load
+        // Prepare 'driver' for use
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\jegmc\\C file\\chromedriver2.exe");
+        driver = new ChromeDriver();
+        actions = new Actions(driver);
+        Thread.sleep(2000);
     }
 
     // Test 1: Hover over the 'Products' menu and check if the dropdown appears
     @Test(priority = 1)
-    void testHoverOverProductsMenu() throws InterruptedException {
+    public void testHoverOverProductsMenu() throws InterruptedException {
+        driver.get("https://aws.amazon.com/free/");
+        driver.manage().window().maximize();
+        Thread.sleep(1500);
         WebElement productsMenu = driver.findElement(By.xpath("//*[@id=\"m-nav\"]/div[1]/div[2]/nav/ul/li[2]/span/a"));
         actions.moveToElement(productsMenu).perform(); // Hover over the 'Products' menu
         Thread.sleep(2000); // Wait for dropdown to load
@@ -37,12 +43,17 @@ public class NavigationMenuTests {
         WebElement dropdown = driver.findElement(By.xpath("//*[@id=\"m-nav\"]/div[1]/div[2]/nav/ul/li[2]/span/a"));
         assert dropdown.isDisplayed() : "'Products' dropdown is not visible after hover.";
 
-        System.out.println("Test 1 Passed - 'Products' menu hover shows dropdown.");
+        System.out.println("Products' menu hover shows dropdown.");
+        System.out.println("Test 1 Passed (navigation)");
+        Thread.sleep(2000);
     }
 
     // Test 2: Click 'Pricing' menu, then click Pricing Calculator and verify the redirection
     @Test(priority = 2)
-    void testClickPricingMenu() throws InterruptedException {
+    public void testClickPricingMenu() throws InterruptedException {
+        driver.get("https://aws.amazon.com/free/");
+        driver.manage().window().maximize();
+        Thread.sleep(1500);
         String originalWindow = driver.getWindowHandle(); // Save current window handle
 
         WebElement pricingMenu = driver.findElement(By.xpath("//*[@id=\"m-nav\"]/div[1]/div[2]/nav/ul/li[4]/span/a"));
@@ -64,16 +75,19 @@ public class NavigationMenuTests {
         // Assert the URL contains 'calculator.aws'
         String currentUrl = driver.getCurrentUrl();
         Assert.assertTrue(currentUrl.contains("calculator.aws"), "Not navigated to Pricing Calculator page.");
-        System.out.println("Test 2 Passed - Navigated to Pricing Calculator.");
+        System.out.println("Navigated to Pricing Calculator.");
 
         driver.switchTo().window(originalWindow); // Switch back to the original tab
+        System.out.println("Test 2 Passed (navigation)");
+        Thread.sleep(2000);
     }
 
     // Test 3: Click on Amazon Q, close popup, scroll to FAQs and assert visibility
     @Test(priority = 3)
-    void testAmazonQFAQsVisibility() throws InterruptedException {
-        driver.get("https://aws.amazon.com/"); // Reload homepage
-
+    public void testAmazonQFAQsVisibility() throws InterruptedException {
+        driver.get("https://aws.amazon.com/free/");
+        driver.manage().window().maximize();
+        Thread.sleep(1500);
         WebElement amazonQButton = driver.findElement(By.xpath("//*[@id=\"m-nav\"]/div[1]/div[2]/nav/ul/li[1]/span/a"));
         amazonQButton.click(); // Click 'Amazon Q'
         Thread.sleep(3000);
@@ -91,14 +105,17 @@ public class NavigationMenuTests {
         // Check if the FAQ header is visible
         WebElement faqHeader = driver.findElement(By.xpath("//*[@id=\"Amazon-Q-FAQs\"]/div/div/div[1]/div/h2"));
         Assert.assertTrue(faqHeader.isDisplayed(), "'Amazon Q FAQs' section is not visible.");
-        System.out.println("Test 3 Passed - Amazon Q FAQs section is visible.");
-    }
+
+        System.out.println("Amazon Q FAQs section is visible.");
+        System.out.println("Test 3 Passed (navigation)");
+        Thread.sleep(2000);      }
 
     // Test 4: Verify all top-level navigation links are visible on the homepage
     @Test(priority = 4)
-    void testAllNavLinksAreDisplayed() {
-        driver.get("https://aws.amazon.com/"); // Reload homepage
-
+    public void testAllNavLinksAreDisplayed() throws InterruptedException {
+        driver.get("https://aws.amazon.com/free/");
+        driver.manage().window().maximize();
+        Thread.sleep(1500);
         // Define XPaths for each top-level navigation link
         String[] navLinkXPaths = {
                 "//*[@id='m-nav']/div[1]/div[2]/nav/ul/li[1]/span/a", // Amazon Q
@@ -115,14 +132,17 @@ public class NavigationMenuTests {
             Assert.assertTrue(navLink.isDisplayed(), "Navigation link is not visible: " + xpath);
         }
 
-        System.out.println("Test 4 Passed - All top-level nav links are displayed.");
+        System.out.println("All top-level nav links are displayed.");
+        System.out.println("Test 4 Passed (navigation)");
+        Thread.sleep(2000);
     }
 
     // Test 5: Check that all external footer links open in a new tab
     @Test(priority = 5)
-    void testExternalFooterLinksOpenInNewTab() {
-        driver.get("https://aws.amazon.com/");
-
+    public void testExternalFooterLinksOpenInNewTab() throws InterruptedException {
+        driver.get("https://aws.amazon.com/free/");
+        driver.manage().window().maximize();
+        Thread.sleep(1500);
         // Accept cookies if banner appears
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -149,15 +169,17 @@ public class NavigationMenuTests {
             }
         }
 
-        System.out.println("Test 5 Passed - All external footer links open in a new tab.");
+        System.out.println("All external footer links open in a new tab.");
+        System.out.println("Test 5 Passed (navigation)\n");
+        Thread.sleep(2000);
     }
 
-    // Runs once after all tests – quits the browser
+
     @AfterClass
-    public void tearDown() throws InterruptedException {
+    public void driverQuit() throws InterruptedException {
         if (driver != null) {
-            Thread.sleep(2000); // Wait before closing
-            driver.quit(); // Close the browser
+            Thread.sleep(2000);
+            driver.quit();
         }
     }
 }

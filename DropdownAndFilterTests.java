@@ -1,23 +1,33 @@
+package TestCases;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.*;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import java.io.File;
+import org.openqa.selenium.io.FileHandler;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import org.testng.annotations.Test;
 
 public class DropdownAndFilterTests {
-
     static WebDriver driver;
 
     @BeforeClass
     public void setup() throws InterruptedException {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\pagan\\Desktop\\School\\Software Testing\\Drivers\\chromedriver.exe");
+        // Prepare 'driver' for use
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\jegmc\\C file\\chromedriver2.exe");
         driver = new ChromeDriver();
-        driver.get("https://aws.amazon.com/free/");
-        driver.manage().window().maximize();
-        Thread.sleep(3000);
+        Thread.sleep(2000);
     }
 
     @Test(priority = 1)
     void testFreeTierCategoriesDropdown() throws InterruptedException {
+        driver.get("https://aws.amazon.com/free/");
+        driver.manage().window().maximize();
+        Thread.sleep(1500);
         // Click category filter
         WebElement categoryDropdown = driver.findElement(By.xpath("//*[@id=\"popover-category-trigger\"]"));
         categoryDropdown.click();
@@ -26,11 +36,14 @@ public class DropdownAndFilterTests {
         // verify options are there
         List<WebElement> categories = driver.findElements(By.xpath("//*[@id=\"popover-category-trigger\"]"));
         assert categories.size() > 0 : "No category options found.";
-        System.out.println("Test 1 Passed");
+        System.out.println("Test 1 Passed (dropdown)");
     }
 
     @Test(priority = 2)
     void testFeaturedOffersForBusinesses() throws InterruptedException {
+        driver.get("https://aws.amazon.com/free/");
+        driver.manage().window().maximize();
+        Thread.sleep(1500);
         // store the current window handle
         String originalWindow = driver.getWindowHandle();
 
@@ -56,7 +69,7 @@ public class DropdownAndFilterTests {
         String pageSource = driver.getPageSource().toLowerCase();
         assert pageSource.contains("startup") : "Expected 'startup' content not found in new tab.";
 
-        System.out.println("Test 2 Passed");
+        System.out.println("Test 2 Passed (dropdown)");
 
         // close the new tab and switch back to the original
         driver.close();
@@ -67,7 +80,8 @@ public class DropdownAndFilterTests {
     @Test(priority = 3)
     void testMarketPlaceDropdown() throws InterruptedException {
         driver.get("https://aws.amazon.com/free/");
-
+        driver.manage().window().maximize();
+        Thread.sleep(1500);
         // select marketplace dropdown
         WebElement dropdown = driver.findElement(By.xpath("//*[@id=\"m-nav\"]/div[1]/div[2]/nav/ul/li[8]/span/a"));
         dropdown.click();
@@ -82,12 +96,14 @@ public class DropdownAndFilterTests {
         String pageSource = driver.getPageSource().toLowerCase();
         assert pageSource.contains("browse aws marketplace") : "Expected marketplace, not found after filter.";
 
-        System.out.println("Test 3 Passed");
+        System.out.println("Test 3 Passed (dropdown)");
     }
 
     @Test(priority = 4)
     void testFeaturedFilter() throws InterruptedException {
         driver.get("https://aws.amazon.com/free/");
+        driver.manage().window().maximize();
+        Thread.sleep(1500);
         // scroll down to option
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0, 1250)");
@@ -106,11 +122,14 @@ public class DropdownAndFilterTests {
         // verify
         String pageSource = driver.getPageSource().toLowerCase();
         assert pageSource.contains("mq") : "Expected filter services not found.";
-        System.out.println("Test 4 Passed");
+        System.out.println("Test 4 Passed (dropdown)");
     }
 
     @Test(priority = 5)
     void testLanguageDropdown() throws InterruptedException {
+        driver.get("https://aws.amazon.com/free/");
+        driver.manage().window().maximize();
+        Thread.sleep(1500);
         // click language dropdown
         WebElement languageDropdown = driver.findElement(By.xpath("//*[@id=\"m-nav-language-selector\"]"));
         languageDropdown.click();
@@ -125,11 +144,11 @@ public class DropdownAndFilterTests {
         String pageSource = driver.getPageSource().toLowerCase();
         assert pageSource.contains("nivel gratuito de aws") : "language not displayed properly.";
 
-        System.out.println("Test 5 Passed");
+        System.out.println("Test 5 Passed (dropdown)\n");
     }
 
     @AfterClass
-    public void tearDown() throws InterruptedException {
+    public void driverQuit() throws InterruptedException {
         if (driver != null) {
             Thread.sleep(2000);
             driver.quit();

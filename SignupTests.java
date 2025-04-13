@@ -42,34 +42,30 @@ public class SignupTests {
         String expectedURL = "https://portal.aws.amazon.com/billing/signup";
         String currentURL = driver.getCurrentUrl();
         assert currentURL.contains("signup") : "Did not navigate to signup page.";
+        Thread.sleep(2000);
+        System.out.println("Test 1 Passed (signup)");
     }
 
     @Test(priority = 2)
     public void testFormFieldPresence() throws InterruptedException {
-        driver.get("https://aws.amazon.com/free/");
+        driver.get("https://signin.aws.amazon.com/signup?request_type=register");
         driver.manage().window().maximize();
         Thread.sleep(2000);
-
-        WebElement createAccountBtn = driver.findElement(By.linkText("Create an AWS Account"));
-        createAccountBtn.click();
-        Thread.sleep(3000);
 
         WebElement emailField = driver.findElement(By.xpath("//*[@id=\"emailAddress\"]"));
         WebElement accountName = driver.findElement(By.xpath("//*[@id=\"accountName\"]"));
 
         assert emailField.isDisplayed();
         assert accountName.isDisplayed();
+        Thread.sleep(2000);
+        System.out.println("Test 2 Passed (signup)");
     }
 
     @Test(priority = 3)
     public void testEmptyFormSubmission() throws InterruptedException {
-        driver.get("https://aws.amazon.com/free/");
+        driver.get("https://signin.aws.amazon.com/signup?request_type=register");
         driver.manage().window().maximize();
         Thread.sleep(2000);
-
-        WebElement createAccountBtn = driver.findElement(By.linkText("Create an AWS Account"));
-        createAccountBtn.click();
-        Thread.sleep(3000);
 
         WebElement continueBtn = driver.findElement(By.xpath("//*[@id=\"__next\"]/main/div[2]/div/div/div[3]/div/div/form/div/div/div[2]/div[3]/button/span"));
         continueBtn.click();
@@ -77,17 +73,15 @@ public class SignupTests {
 
         WebElement errorBox = driver.findElement(By.xpath("//*[@id=\"emailAddress-error\"]/div/div/span"));
         assert errorBox.isDisplayed();
+        Thread.sleep(2000);
+        System.out.println("Test 3 Passed (signup)");
     }
 
     @Test(priority = 4)
     public void testSecurityPopup() throws InterruptedException {
-        driver.get("https://aws.amazon.com/free/");
+        driver.get("https://signin.aws.amazon.com/signup?request_type=register");
         driver.manage().window().maximize();
         Thread.sleep(2000);
-
-        WebElement createAccountBtn = driver.findElement(By.linkText("Create an AWS Account"));
-        createAccountBtn.click();
-        Thread.sleep(3000);
 
         // Replace with actual selector from AWS (adjust if different)
         WebElement emailField = driver.findElement(By.xpath("//*[@id=\"emailAddress\"]"));
@@ -106,6 +100,8 @@ public class SignupTests {
             WebElement securityHeader = driver.findElement(By.xpath("//*[contains(text(), 'Security Verification')]"));
             if (securityHeader.isDisplayed()) {
                 System.out.println("Security Verification popup is displayed.");
+                Thread.sleep(2000);
+                System.out.println("Test 4 Passed (signup)");
                 return;
             }
         } catch (NoSuchElementException e) {
@@ -155,8 +151,9 @@ public class SignupTests {
         } catch (NoSuchElementException e) {
             assert false : " 'You have exceeded the character limit.' not found.";
         }
+        Thread.sleep(2000);
+        System.out.println("Test 5 Passed (signup)\n");
     }
-
 
     @AfterClass
     public void driverQuit() throws InterruptedException {
