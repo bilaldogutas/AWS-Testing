@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite" preserve-order="true">
+
+    <test name="DropdownAndFilterTests" preserve-order="true">
+        <classes>
+            <class name="TestCases.DropdownAndFilterTests">
+                <methods>
+                    <include name="testFreeTierCategoriesDropdown" />
+                    <include name="testFeaturedOffersForBusinesses" />
+                    <include name="testMarketPlaceDropdown" />
+                    <include name="testFeaturedFilter" />
+                    <include name="testLanguageDropdown" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="FooterTests" preserve-order="true">
+        <classes>
+            <class name="TestCases.FooterTests">
+                <methods>
+                    <include name="testPrivacyPolicyLink" />
+                    <include name="testTermsOfServiceLink" />
+                    <include name="testContactUsLink" />
+                    <include name="testSocialIconsPresence" />
+                    <include name="testFooterTextContent" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="FormElementTests" preserve-order="true">
+        <classes>
+            <class name="TestCases.FormElementTests">
+                <methods>
+                    <include name="testRadioButtonSelection" />
+                    <include name="testRequiredNameField" />
+                    <include name="testRequiredEmailField" />
+                    <include name="testCompleteFormSubmission" />
+                    <include name="testNavigateAfterSubmission" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="HomePageTests" preserve-order="true">
+        <classes>
+            <class name="TestCases.HomePageTests">
+                <methods>
+                    <include name="testPageTitle" />
+                    <include name="testCurrentURL" />
+                    <include name="testHeroImageVisibility" />
+                    <include name="testScrollToBottom" />
+                    <include name="testScreenshotOfHomePage" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="NavigationMenuTests" preserve-order="true">
+        <classes>
+            <class name="TestCases.NavigationMenuTests">
+                <methods>
+                    <include name="testHoverOverProductsMenu" />
+                    <include name="testClickPricingMenu" />
+                    <include name="testAmazonQFAQsVisibility" />
+                    <include name="testAllNavLinksAreDisplayed" />
+                    <include name="testExternalFooterLinksOpenInNewTab" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="SearchFunctionTests" preserve-order="true">
+        <classes>
+            <class name="TestCases.SearchFunctionTests">
+                <methods>
+                    <include name="testSearchWithValidKeyword" />
+                    <include name="testEmptySearchReturnsNothing" />
+                    <include name="testSearchWithSpecialCharacters" />
+                    <include name="testCaseInsensitiveSearch" />
+                    <include name="testScreenshotOfSearchResults" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="SignupTests" preserve-order="true">
+        <classes>
+            <class name="TestCases.SignupTests">
+                <methods>
+                    <include name="testNavigateToSignupPage" />
+                    <include name="testFormFieldPresence" />
+                    <include name="testEmptyFormSubmission" />
+                    <include name="testSecurityPopup" />
+                    <include name="testFormInputCharacterLimits" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="WindowAndAlertTests" preserve-order="true">
+        <classes>
+            <class name="TestCases.WindowAndAlertTests">
+                <methods>
+                    <include name="testExternalLinkOpensNewTab" />
+                    <include name="testSwitchBackToMainTab" />
+                    <include name="testModalPopupDisplay" />
+                    <include name="testAcceptAlertBox" />
+                    <include name="testMultipleTabNavigation" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>
